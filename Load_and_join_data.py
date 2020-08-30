@@ -2,7 +2,7 @@ import os
 
 #Clear Project
 QgsProject.instance().removeAllMapLayers()
-dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\Real_Folder\\'
+dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\COVID-Cartograms\\'
 
 
 #Load US states layer

@@ -1,6 +1,6 @@
 import pandas, numpy
 from datetime import datetime
-dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\Real_Folder\\'
+dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\'
 
 # Read raw COVID Tracking Project Data
 # Data downloaded from https://covidtracking.com/data/download, the 'data for all state link'

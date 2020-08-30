@@ -1,8 +1,7 @@
 #Get refrence to project
-import time
 from datetime import datetime
 project = QgsProject.instance()
-dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\Real_Folder\\'
+dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\COVID-Cartograms\\'
 cartogram_data_dir = dirpath + 'Outputs\\Cartogram_layer_exports\\'
 
 def calculate_deaths(date):
@@ -86,7 +85,7 @@ for filename in os.listdir(cartogram_data_dir): #For each geopackge in the Carto
         title.setFont(QFont('Arial', 28))
         title.attemptMove(QgsLayoutPoint(95, 10, QgsUnitTypes.LayoutMillimeters))
         title.attemptResize(QgsLayoutSize(260, 20,QgsUnitTypes.LayoutMillimeters))
-        title.setText(title_date + ' - ' + f"{total_deaths_lower49:,d}" + ' deaths*')
+        title.setText(title_date + ' - ' + f"{total_deaths_lower49:,d}" + ' deaths')
         layout.addLayoutItem(title)
 
         #Export as image
