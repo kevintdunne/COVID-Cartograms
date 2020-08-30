@@ -1,0 +1,17 @@
+# ignore all files starting with . or ~
+.*
+~*
+
+/Outputs
+/Map_Elements
+/Raw_COVID_Data
+/Lower_49_Layer
+
+# -------------------------
+# BEGIN Whitelisted Files
+# -------------------------
+
+# track these files, if they exist
+!.gitignore
+!.editorconfig
+!.phpcs.xml.dist
