@@ -1,5 +1,5 @@
 import osgeo.ogr,os
-dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\'
+dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\COVID-Cartograms\\'
 folder_path_extension = 'Outputs\\Cartogram_layer_exports\\'
 
 if os.path.exists (dirpath + folder_path_extension) == False:

@@ -1,6 +1,6 @@
 import pandas, numpy
 from datetime import datetime
-dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\'
+dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\COVID-Cartograms'
 
 # Read raw COVID Tracking Project Data
 # Data downloaded from https://covidtracking.com/data/download, the 'data for all state link'
@@ -30,7 +30,10 @@ for i in range(num_input_rows):
     one_row_per_state.at[proper_row, proper_column + 1] = df.iloc[i, 1]
 
     #deaths
-    one_row_per_state.at[proper_row, proper_column + 2] = df.iloc[i, 2]
+    if df.iloc[i, 2] == 0:
+        one_row_per_state.at[proper_row, proper_column + 2] = 0.1
+    else:
+        one_row_per_state.at[proper_row, proper_column + 2] = df.iloc[i, 2]
 
     #weekly growth in Deaths
     deaths_today = one_row_per_state.iloc[proper_row, proper_column + 2] #pulling deaths today from line above
@@ -39,34 +42,36 @@ for i in range(num_input_rows):
     if proper_column < 28 or deaths_week_ago == 0: #first 28 columns are week of March 12th to 19th. No data from previous week, so set Weekly Death increase to zero
         one_row_per_state.at[proper_row, proper_column + 3] = 0
     else :#calculate pct change in deaths from today to last week
-    	one_row_per_state.at[proper_row, proper_column + 3] = round(((deaths_today - deaths_week_ago) / deaths_week_ago) * 100, 2)
+        one_row_per_state.at[proper_row, proper_column + 3] = round(((deaths_today - deaths_week_ago) / deaths_week_ago) * 100, 2)
 
 
 # Construct column headers for one_row_per_state
 header = []
 for j in range(num_columns):
-	if j % 4 == 0:
-		header.append('Date')
-	elif j % 4 == 1:
-		header.append('State')
-	elif j % 4 == 2:
-		header.append(one_row_per_state.iloc[1, j - 2] + '_Deaths')
-	elif j % 4 == 3:
-		header.append(one_row_per_state.iloc[1, j - 3] + '_WoWPCTIncrease')
+    if j % 4 == 0:
+        header.append('Date')
+    elif j % 4 == 1:
+        header.append('State')
+    elif j % 4 == 2:
+        header.append(one_row_per_state.iloc[1, j - 2] + '_Deaths')
+    elif j % 4 == 3:
+        header.append(one_row_per_state.iloc[1, j - 3] + '_WoWPCTIncrease')
 
 one_row_per_state.columns = header
 
-
 # Split one_row_per_state into a a csv file for each day, and export with appropriate name, and accompnying .csvt file
 for j in range(int(num_columns / 4)):
-	output = one_row_per_state.iloc[:, [j * 4, (j * 4) + 1, (j * 4) + 2, (j * 4) + 3]] #Each 4 rows are the data for a certian day
-	date_as_string = str(output.iloc[0,0])
+    output = one_row_per_state.iloc[:, [j * 4, (j * 4) + 1, (j * 4) + 2, (j * 4) + 3]] #Each 4 rows are the data for a certian day
+    date_as_string = str(output.iloc[0,0])
 
-	file_name = dirpath + '\\Outputs\\Daily_COVID_data_exports\\' + date_as_string + '.csv'
-	output.to_csv(file_name, index=False)
+    file_name = dirpath + '\\Outputs\\Daily_COVID_data_exports\\' + date_as_string + '.csv'
+    output.to_csv(file_name, index=False)
 
-	csvt = open(file_name + 't', "w") #make csvt files so QGIS's delimted text import interprets the columns as the proper data types
-	print('String(20),String(20),Integer64(10),Real(10)', file=csvt)
-	csvt.close()
+    csvt = open(file_name + 't', "w") #make csvt files so QGIS's delimted text import interprets the columns as the proper data types
+    print('String(20),String(20),Real(10),Real(10)', file=csvt)
+    csvt.close()
+    
+
 
 print(str(j) + ' CSV files exported sucessfully')
+
