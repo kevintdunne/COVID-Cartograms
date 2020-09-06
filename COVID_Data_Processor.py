@@ -4,8 +4,7 @@ dirpath = 'C:\\Users\\kevin\\Desktop\\COVID_MAP\\COVID-Cartograms'
 
 # Read raw COVID Tracking Project Data
 # Data downloaded from https://covidtracking.com/data/download, the 'data for all state link'
-# Directly downloadable at https://covidtracking.com/data/download/all-states-history.csv
-df = pandas.read_csv(dirpath + '\\Raw_COVID_Data\\all-states-history-aug-26.csv')
+df = pandas.read_csv(dirpath + '\\Raw_COVID_Data\\all-states-history-sep-09.csv')
 
 #Clean data by dropping unneeded columns, data before March 12th 2020, juristictions outside the lower 49, filling NaN death values with 0, and sorting by date and state
 df = df[['date','state','death']]

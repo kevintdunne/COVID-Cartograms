@@ -18,7 +18,7 @@ project = QgsProject.instance()
 
 
 start_date_int = 0 # yyyymmdd format, 0 for all days
-end_date_int = 9999999999 # yyyymmdd format, 9999999999 for all days
+end_date_int = 99999999999999 # yyyymmdd format, 9999999999 for all days
 
 for filename in os.listdir(cartogram_data_dir): #For each geopackge in the Cartogram export folder
     date_formatted = filename[10:20]
@@ -104,7 +104,8 @@ for filename in os.listdir(cartogram_data_dir): #For each geopackge in the Carto
         # Create categories based on break_values arry
         for i in range(number_categories):
             symbol = QgsSymbol.defaultSymbol(cartogram.geometryType())
-            symbol.setColor(QColor(255, 255 - ((255 / number_categories) * i), 255 - ((255 / number_categories) * i)))   
+            symbol.setColor(QColor(255, 255 - ((255 / number_categories) * i), 255 - ((255 / number_categories) * i)))
+
             symbol_name = str(break_values[i]) + ' - ' + str(break_values[i + 1])
             myRange = QgsRendererRange(break_values[i], break_values[i + 1], symbol, symbol_name)  
             myRangeList.append(myRange)
@@ -146,7 +147,7 @@ for filename in os.listdir(cartogram_data_dir): #For each geopackge in the Carto
 
         #Date
         title = QgsLayoutItemLabel(layout)
-        title.setFont(QFont('Arial', 28))
+        title.setFont(QFont('Courier New Bold', 25))
         title.setFontColor(QtCore.Qt.white)
         title.attemptMove(QgsLayoutPoint(20, 10, QgsUnitTypes.LayoutMillimeters))
         title.attemptResize(QgsLayoutSize(100, 20,QgsUnitTypes.LayoutMillimeters))
@@ -155,9 +156,9 @@ for filename in os.listdir(cartogram_data_dir): #For each geopackge in the Carto
 
         #Num of deaths
         title = QgsLayoutItemLabel(layout)
-        title.setFont(QFont('Arial', 28))
+        title.setFont(QFont('Courier New Bold', 25))
         title.setFontColor(QtCore.Qt.white)
-        title.attemptMove(QgsLayoutPoint(210, 10, QgsUnitTypes.LayoutMillimeters))
+        title.attemptMove(QgsLayoutPoint(200, 10, QgsUnitTypes.LayoutMillimeters))
         title.attemptResize(QgsLayoutSize(100, 20,QgsUnitTypes.LayoutMillimeters))
         title.setText(f"{total_deaths_lower49:,d}" + ' deaths')
         layout.addLayoutItem(title)

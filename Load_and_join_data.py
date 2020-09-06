@@ -10,8 +10,8 @@ lower49_path = dirpath + 'Lower_49_Layer\\Lower_49.gpkg|layername=Lower_49'
 
 
 #Load all CSVs within desired date range
-start_date_int = 20200417# yyyymmdd format, 0 for all days
-end_date_int = 20200431 # yyyymmdd format, 9999999999 for all days
+start_date_int = 20200826# yyyymmdd format, 0 for all days
+end_date_int = 9999999999 # yyyymmdd format, 9999999999 for all days
 #last_digit = 1
 pct_layers_use = 1 # percentage of layers to load, in demoninator form. 1 processes all csvs, 2 loads 50%(every other day), 3 loads 33%(every 3rd day), etc.
 COVID_data_dir = dirpath + 'Outputs\\Daily_COVID_data_exports\\'
